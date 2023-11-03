@@ -1,12 +1,24 @@
 package com.bridglabz;
 
 public class EmployeeWage {
-    //constant
     public static final int IS_PART_Time=1;
     public static final int IS_FULL_TIME=2;
-    public static int computeEmpWage(String company,int empRatePerHour,int numOfWorkingDays,int maxHoursPerMonth){
+
+    private final String company;
+    private final int empRatePerHour;
+    private final int numOfWorkingDays;
+    private final int maxHoursPerMonth;
+    private int totalEmpEage;
+
+    public EmployeeWage(String company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth) {
+        this.company = company;
+        this.empRatePerHour = empRatePerHour;
+        this.numOfWorkingDays = numOfWorkingDays;
+        this.maxHoursPerMonth = maxHoursPerMonth;
+    }
+    public void computeEmpWage(){
         //variable
-        int empHrs=0,totalEmphrs=0,totalWorkingDays=0;
+        int empHrs=0, totalEmphrs=0, totalWorkingDays = 0;
         //computation
         while(totalEmphrs <= maxHoursPerMonth && totalWorkingDays < numOfWorkingDays){
             totalWorkingDays++;
@@ -24,12 +36,18 @@ public class EmployeeWage {
             totalEmphrs +=empHrs;
             System.out.println("Day: "+totalWorkingDays+"Emp Hr: "+empHrs);
         }
-        int totalEmpWage = totalEmphrs * empRatePerHour;
-        System.out.println("Total Emp Wage For Company : "+company+" is :"+totalEmpWage);
-        return totalEmpWage;
+        totalEmpEage=totalEmphrs*empRatePerHour;
+    }
+    @Override
+    public String toString() {
+        return "Total Emp wage For Company: " +company+ " is: "+totalEmpEage;
     }
     public static void main(String[] args) {
-        computeEmpWage("Dmart",20,20,100);
-        computeEmpWage("Reliance",10,4,20);
+        EmployeeWage Dmart=new EmployeeWage("Dmart",20,20,100);
+        EmployeeWage reliance=new EmployeeWage("Reliance",10,4,20);
+        Dmart.computeEmpWage();
+        System.out.println(Dmart);
+        reliance.computeEmpWage();
+        System.out.println(reliance);
     }
 }
